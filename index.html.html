@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lydia Iana Gutierrez — Research Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-50:  #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-300: #5DCAA5;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --gray-50:  #F7F6F2;
+    --gray-100: #EDECE7;
+    --gray-200: #D3D1C7;
+    --gray-400: #888780;
+    --gray-600: #5F5E5A;
+    --gray-900: #1A1A18;
+    --amber-50: #FAEEDA;
+    --amber-400: #BA7517;
+    --amber-600: #854F0B;
+    --blue-50:  #E6F1FB;
+    --blue-400: #185FA5;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans:  'DM Sans', system-ui, sans-serif;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--gray-50);
+    color: var(--gray-900);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 60px;
+    background: rgba(247,246,242,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--gray-900);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray-600);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal-400); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--teal-600) !important;
+    padding: 6px 16px;
+    border: 1px solid var(--teal-300);
+    border-radius: 20px;
+    transition: background 0.2s, color 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--teal-400) !important;
+    color: #fff !important;
+    border-color: var(--teal-400);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: -0.05em;
+    transform: translateY(-50%);
+    font-family: var(--serif);
+    font-size: clamp(120px, 18vw, 240px);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(29,158,117,0.12);
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-400);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: reveal 0.8s var(--ease-out) 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--gray-900);
+    margin-bottom: 0.4em;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal 0.9s var(--ease-out) 0.35s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--teal-400);
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: 300;
+    color: var(--gray-600);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: reveal 0.8s var(--ease-out) 0.5s forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: reveal 0.8s var(--ease-out) 0.65s forwards;
+  }
+
+  .hero-tag {
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--gray-200);
+    color: var(--gray-600);
+    background: white;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: reveal 1s var(--ease-out) 1s forwards;
+  }
+
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    writing-mode: vertical-rl;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--teal-300), transparent);
+    animation: scrollLine 2s ease-in-out infinite 1.5s;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section { padding: 7rem 3rem; }
+  section:nth-child(even) { background: white; }
+
+  .section-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-400);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--gray-900);
+    margin-bottom: 3rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--teal-400); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .about-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+  }
+
+  .about-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+
+  .about-card.accent {
+    background: var(--teal-50);
+    border-color: var(--teal-100);
+    grid-column: span 2;
+  }
+
+  .about-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal-600);
+    margin-bottom: 0.5rem;
+  }
+
+  .about-card-text {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-900);
+    line-height: 1.65;
+  }
+
+  .about-card.accent .about-card-text {
+    font-size: 17px;
+    color: var(--teal-800);
+  }
+
+  /* ── FEATURED PROJECT ── */
+  .featured-project {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .featured-left {}
+
+  .featured-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: var(--teal-50);
+    color: var(--teal-600);
+    border: 1px solid var(--teal-100);
+    margin-bottom: 1.25rem;
+  }
+
+  .featured-headline {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--gray-900);
+    margin-bottom: 1.25rem;
+  }
+
+  .featured-challenge {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-600);
+    line-height: 1.7;
+    font-style: italic;
+    border-left: 2px solid var(--teal-300);
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--teal-400);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--gray-600);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .featured-right {}
+
+  .step-list {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .step-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--gray-900);
+    line-height: 1.6;
+  }
+
+  .step-list li:last-child { border-bottom: none; }
+
+  .step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--teal-400);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .outcomes-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 10px;
+  }
+
+  .outcome-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .outcome-pill {
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--gray-200);
+    color: var(--gray-900);
+    font-weight: 400;
+  }
+
+  /* ── PROJECT CARDS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .project-card {
+    background: white;
+    border: 1px solid var(--gray-100);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
+    cursor: default;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+  }
+
+  .project-card-top {
+    padding: 1.75rem 1.75rem 1.25rem;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--gray-900);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .badge-teal { background: var(--teal-50); color: var(--teal-600); border: 1px solid var(--teal-100); }
+  .badge-amber { background: var(--amber-50); color: var(--amber-600); border: 1px solid #FAC775; }
+  .badge-blue { background: var(--blue-50); color: var(--blue-400); border: 1px solid #B5D4F4; }
+
+  .project-card-body { padding: 1.5rem 1.75rem; }
+
+  .card-challenge {
+    font-size: 13px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gray-600);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    padding-left: 10px;
+    border-left: 2px solid var(--teal-100);
+  }
+
+  .mini-steps { list-style: none; }
+
+  .mini-steps li {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gray-900);
+    padding: 5px 0 5px 1.1rem;
+    position: relative;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .mini-steps li:last-child { border-bottom: none; }
+
+  .mini-steps li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal-400);
+  }
+
+  .card-outcomes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  .mini-pill {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    color: var(--gray-600);
+  }
+
+  /* ── MISCELLANEOUS ── */
+  .misc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .misc-card {
+    border: 1px solid var(--gray-100);
+    border-radius: 14px;
+    padding: 1.5rem;
+    background: var(--gray-50);
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .misc-card:hover { transform: translateY(-3px); }
+
+  .misc-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--teal-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 18px;
+  }
+
+  .misc-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--gray-900);
+    line-height: 1.55;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-timeline { position: relative; padding-left: 2rem; }
+
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--teal-300), transparent);
+  }
+
+  .exp-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  .exp-item:last-child { padding-bottom: 0; }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--teal-400);
+    border: 2px solid var(--gray-50);
+    margin-left: -4px;
+  }
+
+  .exp-date {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--teal-400);
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 2px;
+  }
+
+  .exp-role {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--gray-600);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-note {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* ── CREDENTIALS ── */
+  .certs-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .cert-pill {
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--gray-200);
+    background: white;
+    color: var(--gray-900);
+  }
+
+  .podcast-list { }
+
+  .podcast-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .podcast-item:last-child { border-bottom: none; }
+
+  .podcast-ep {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--teal-400);
+    white-space: nowrap;
+    padding-top: 2px;
+    min-width: 80px;
+  }
+
+  .podcast-title {
+    font-size: 15px;
+    color: var(--gray-900);
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
+
+  .podcast-date {
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  /* ── CONTACT ── */
+  .contact-block {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .contact-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--teal-50);
+    border: 2px solid var(--teal-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 26px;
+    color: var(--teal-600);
+    flex-shrink: 0;
+  }
+
+  .contact-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--gray-900);
+    margin-bottom: 6px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-link {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-600);
+    text-decoration: none;
+  }
+
+  .contact-link:hover { color: var(--teal-400); }
+
+  .contact-cta {
+    margin-top: 1.5rem;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 28px;
+    border-radius: 28px;
+    background: var(--teal-400);
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .contact-cta:hover {
+    background: var(--teal-600);
+    transform: translateY(-2px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--gray-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--gray-50);
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--gray-400);
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: none; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .about-grid,
+    .projects-grid,
+    .misc-grid,
+    .featured-project { grid-template-columns: 1fr; }
+    .about-card.accent { grid-column: span 1; }
+    .stat-grid { grid-template-columns: repeat(3, 1fr); }
+    .contact-block { flex-direction: column; gap: 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Lydia Iana</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#featured">Featured Project</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:60px;" id="top">
+  <div class="hero-bg-text" aria-hidden="true">ReOps</div>
+  <p class="hero-eyebrow">Research Operations Portfolio · 2026</p>
+  <h1 class="hero-name">Lydia <em>Iana</em><br>Gutierrez</h1>
+  <p class="hero-sub">Senior UX Research Operations Program Manager specializing in building and scaling high-performing research operations across Fortune 500 companies.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">Vendor Management</span>
+    <span class="hero-tag">Process Design</span>
+    <span class="hero-tag">Recruitment Ops</span>
+    <span class="hero-tag">Cross-functional Collaboration</span>
+    <span class="hero-tag">Knowledge Management</span>
+    <span class="hero-tag">Program Management</span>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">About me</p>
+    <h2 class="section-title reveal reveal-delay-1">Built for <em>ambiguity.</em><br>Wired for structure.</h2>
+    <div class="about-grid">
+      <div class="about-card accent reveal">
+        <p class="about-card-label">The short version</p>
+        <p class="about-card-text">Communication major turned research ops leader — proof that how you work with people matters as much as what you build. Born and raised in San Jose, CA. I gravitate toward problems without playbooks, because those are the ones worth solving.</p>
+      </div>
+      <div class="about-card reveal reveal-delay-1">
+        <p class="about-card-label">Communication style</p>
+        <p class="about-card-text">Documentation-first, proactive with updates, and always building relationships across teams before problems arise. I meet people where they are and translate complexity into clarity.</p>
+      </div>
+      <div class="about-card reveal reveal-delay-2">
+        <p class="about-card-label">What drives me</p>
+        <p class="about-card-text">Unstructured problems are opportunities to build something lasting — something the next person can pick up and run with. I care about leaving systems better than I found them.</p>
+      </div>
+      <div class="about-card reveal reveal-delay-3">
+        <p class="about-card-label">Outside work</p>
+        <p class="about-card-text">Traveling, live music, reading, beaches, taking photos, and Disney. Always interested in learning something new — AI certifications, podcast appearances, community career ladders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECT -->
+<section id="featured">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Featured project · depth of experience</p>
+    <h2 class="section-title reveal reveal-delay-1">Research Intake &amp;<br><em>Bandwidth Tracking</em></h2>
+
+    <div class="featured-project">
+      <div class="featured-left reveal">
+        <span class="featured-tag">Cisco Systems · 2022–2024</span>
+        <h3 class="featured-headline">Centralized visibility for a research team operating in the dark</h3>
+        <p class="featured-challenge">"There was no single place to track what research projects were in flight, who owned them, or how much bandwidth UX researchers had — requests came in informally with no visibility for leadership."</p>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-number">250%</div>
+            <div class="stat-label">increase in studies YoY</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">↓</div>
+            <div class="stat-label">study turnaround time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">↓</div>
+            <div class="stat-label">cost per study</div>
+          </div>
+        </div>
+
+        <div class="outcomes-label">Key deliverables</div>
+        <div class="outcome-pills">
+          <span class="outcome-pill">Centralized project dashboard</span>
+          <span class="outcome-pill">Researcher bandwidth tracking</span>
+          <span class="outcome-pill">Standardized intake playbook</span>
+          <span class="outcome-pill">Leadership reporting system</span>
+          <span class="outcome-pill">Researcher onboarding program</span>
+        </div>
+      </div>
+
+      <div class="featured-right reveal reveal-delay-2">
+        <div style="background:var(--gray-50); border:1px solid var(--gray-100); border-radius:16px; padding:1.75rem; margin-bottom:1rem;">
+          <p class="outcomes-label" style="margin-bottom:1rem;">How I approached it</p>
+          <ul class="step-list">
+            <li><span class="step-dot"></span><span>Started with a Google Form intake — quickly identified it created a new form per request rather than updating one source of truth, and iterated forward</span></li>
+            <li><span class="step-dot"></span><span>Explored MS Power BI to create dashboard reporting for leadership on project status and researcher bandwidth</span></li>
+            <li><span class="step-dot"></span><span>Partnered with DPM to surface bandwidth data that shaped research strategy and managed stakeholder expectations</span></li>
+            <li><span class="step-dot"></span><span>Standardized the intake process and embedded it into onboarding — making it the default, not the exception</span></li>
+            <li><span class="step-dot"></span><span>Documented every decision to enable handoff and future ownership</span></li>
+          </ul>
+        </div>
+
+        <div style="background:var(--teal-50); border:1px solid var(--teal-100); border-radius:12px; padding:1.25rem 1.5rem;">
+          <p class="about-card-label" style="color:var(--teal-600); margin-bottom:0.5rem;">Business impact</p>
+          <p style="font-size:14px; font-weight:300; color:var(--teal-800); line-height:1.65;">By centralizing intake and making researcher bandwidth visible, leadership could shape research strategy proactively — and the team went from reactive to systematically scalable. Studies increased 250% YoY while cost per study dropped.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADDITIONAL PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Additional projects</p>
+    <h2 class="section-title reveal reveal-delay-1">The same pattern,<br><em>different contexts.</em></h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-card-top">
+          <p class="card-eyebrow">UserTesting · 2015–2016</p>
+          <h3 class="card-title">Custom Recruiting Program</h3>
+          <span class="card-badge badge-amber">Recruitment Ops</span>
+        </div>
+        <div class="project-card-body">
+          <p class="card-challenge">"Custom recruiting had no structured process — I inherited an ambiguous mandate and built the foundation from the ground up."</p>
+          <ul class="mini-steps">
+            <li>Drew on prior recruiting experience to establish a working process immediately</li>
+            <li>Documented every action taken to convert into reusable templates later</li>
+            <li>Met proactively with stakeholders to capture tribal knowledge</li>
+            <li>Built detailed contact directories and participant quality databases</li>
+          </ul>
+          <div class="card-outcomes">
+            <span class="mini-pill">Invite &amp; confirmation templates</span>
+            <span class="mini-pill">RFQ templates</span>
+            <span class="mini-pill">Stakeholder contact directory</span>
+            <span class="mini-pill">Participant quality database</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-card-top">
+          <p class="card-eyebrow">PayPal · 2017–2019</p>
+          <h3 class="card-title">Vendor Onboarding &amp; Governance</h3>
+          <span class="card-badge badge-blue">Vendor Management</span>
+        </div>
+        <div class="project-card-body">
+          <p class="card-challenge">"Most people weren't following vendor onboarding rules — or didn't know them — creating compliance risk and costly setbacks."</p>
+          <ul class="mini-steps">
+            <li>Built a running question list; used it to drive structured meetings with Legal, IT, and InfoSec</li>
+            <li>Created and documented an end-to-end vendor onboarding process from scratch</li>
+            <li>Socialized the new process across teams via meetings and internal hubs</li>
+            <li>Embedded the process into new team member onboarding as the default</li>
+          </ul>
+          <div class="card-outcomes">
+            <span class="mini-pill">SOW, MSA, RFQ templates</span>
+            <span class="mini-pill">Vendor capability registry</span>
+            <span class="mini-pill">Legal/IT/InfoSec relationships</span>
+            <span class="mini-pill">Documented, transferable process</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MISC CONTRIBUTIONS -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Beyond the headline projects</p>
+    <h2 class="section-title reveal reveal-delay-1"><em>Additional</em> contributions</h2>
+    <div class="misc-grid">
+      <div class="misc-card reveal reveal-delay-1">
+        <div class="misc-icon">📐</div>
+        <p class="misc-text">Designed and built SharePoint pages to house archived research projects across organizations</p>
+      </div>
+      <div class="misc-card reveal reveal-delay-2">
+        <div class="misc-icon">📖</div>
+        <p class="misc-text">Built Wiki pages with qualitative research best practices for company-wide use</p>
+      </div>
+      <div class="misc-card reveal reveal-delay-3">
+        <div class="misc-icon">🎓</div>
+        <p class="misc-text">Trained researchers, PMs, and designers on UX lab equipment setup and operation</p>
+      </div>
+      <div class="misc-card reveal reveal-delay-1">
+        <div class="misc-icon">📬</div>
+        <p class="misc-text">Designed and distributed engaging team newsletters to increase UXR team visibility at Cisco</p>
+      </div>
+      <div class="misc-card reveal reveal-delay-2">
+        <div class="misc-icon">✅</div>
+        <p class="misc-text">Vetted and onboarded vendors through full IT, Legal, and InfoSec review cycles at multiple companies</p>
+      </div>
+      <div class="misc-card reveal reveal-delay-3">
+        <div class="misc-icon">🗂️</div>
+        <p class="misc-text">Created research libraries, playbooks, and onboarding materials at Google, Facebook, LinkedIn, and Cisco</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Career timeline</p>
+    <h2 class="section-title reveal reveal-delay-1">10+ years building<br><em>research operations.</em></h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+      <div class="exp-timeline reveal reveal-delay-1">
+        <div class="exp-item">
+          <p class="exp-date">Jul 2022 – Nov 2024</p>
+          <p class="exp-company">Cisco Systems</p>
+          <p class="exp-role">Senior UX Research Operations Program Manager</p>
+          <p class="exp-note">Dashboards, playbooks, newsletter, 250% YoY study growth. Embedded intake process &amp; onboarded all new researchers.</p>
+        </div>
+        <div class="exp-item">
+          <p class="exp-date">Aug 2021 – Jul 2022</p>
+          <p class="exp-company">Google <span style="font-weight:300; color:var(--gray-400);">via Artech</span></p>
+          <p class="exp-role">UX Research Program Manager</p>
+          <p class="exp-note">Templates, research archive, UXR Playbook. Supported Emerging Verticals and Ads research.</p>
+        </div>
+        <div class="exp-item">
+          <p class="exp-date">Apr 2020 – Apr 2021</p>
+          <p class="exp-company">Facebook <span style="font-weight:300; color:var(--gray-400);">via TEK Systems</span></p>
+          <p class="exp-role">UX Research Program Manager</p>
+          <p class="exp-note">Bi-weekly rolling research program, research library, qualitative best practices Wiki.</p>
+        </div>
+        <div class="exp-item">
+          <p class="exp-date">Oct 2019 – Jan 2020</p>
+          <p class="exp-company">LinkedIn <span style="font-weight:300; color:var(--gray-400);">via Swoon Staffing</span></p>
+          <p class="exp-role">UX Program Manager</p>
+          <p class="exp-note">Global digital programs, international research library, process and documentation improvements.</p>
+        </div>
+      </div>
+      <div>
+        <div class="exp-timeline reveal reveal-delay-2">
+          <div class="exp-item">
+            <p class="exp-date">Apr 2017 – May 2019</p>
+            <p class="exp-company">PayPal</p>
+            <p class="exp-role">UX Research Operations Coordinator</p>
+            <p class="exp-note">5 UX lab facilities, vendor onboarding &amp; governance, TPA/InfoSec process, quarterly cost forecasting.</p>
+          </div>
+          <div class="exp-item">
+            <p class="exp-date">Apr – Dec 2016</p>
+            <p class="exp-company">Google <span style="font-weight:300; color:var(--gray-400);">via Nelson Technology</span></p>
+            <p class="exp-role">UX Research Recruiter</p>
+            <p class="exp-note">Largest business unit at Google. 4–10 concurrent studies, participant scheduling, incentive distribution.</p>
+          </div>
+          <div class="exp-item">
+            <p class="exp-date">May 2015 – Apr 2016</p>
+            <p class="exp-company">UserTesting</p>
+            <p class="exp-role">UX Research Recruiter</p>
+            <p class="exp-note">Custom recruiting for Cisco, Microsoft, HP, Autodesk &amp; others. Staff mentorship and screener design.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem; background:var(--gray-50); border:1px solid var(--gray-100); border-radius:14px; padding:1.5rem; reveal reveal-delay-3">
+          <p class="about-card-label" style="margin-bottom:1rem;">Education &amp; Certifications</p>
+          <p style="font-size:14px; font-weight:400; color:var(--gray-900); margin-bottom:4px;">B.A. Communication, Management Emphasis</p>
+          <p style="font-size:13px; font-weight:300; color:var(--gray-600); margin-bottom:1.25rem;">St. Mary's College of California</p>
+          <div class="certs-row">
+            <span class="cert-pill">Generative AI for PMs — IBM (2026)</span>
+            <span class="cert-pill">Google AI Essentials (2025)</span>
+            <span class="cert-pill">Google PMP (2025)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Community &amp; thought leadership</p>
+    <h2 class="section-title reveal reveal-delay-1">Shaping the <em>ReOps</em> field.</h2>
+    <div class="podcast-list reveal reveal-delay-2">
+      <div class="podcast-item">
+        <p class="podcast-ep">Ep. 4</p>
+        <div>
+          <p class="podcast-title">Building Enduring Systems Amidst Constant Change</p>
+          <p class="podcast-date">Research Ops 2.0 Podcast · September 2025</p>
+        </div>
+      </div>
+      <div class="podcast-item">
+        <p class="podcast-ep">Ep. 5</p>
+        <div>
+          <p class="podcast-title">The People of ResearchOps</p>
+          <p class="podcast-date">Research Ops 2.0 Podcast · October 2025</p>
+        </div>
+      </div>
+      <div class="podcast-item">
+        <p class="podcast-ep">Collab</p>
+        <div>
+          <p class="podcast-title">The Research Ops Career Ladder — community-built resource</p>
+          <p class="podcast-date">Published November 2025</p>
+        </div>
+      </div>
+      <div class="podcast-item">
+        <p class="podcast-ep">Review</p>
+        <div>
+          <p class="podcast-title">A Year in Review: What Shaped ResearchOps in 2025, and a Look Ahead to 2026</p>
+          <p class="podcast-date">Published November 2025</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:white;">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Get in touch</p>
+    <h2 class="section-title reveal reveal-delay-1">Let's build something<br><em>that lasts.</em></h2>
+    <div class="contact-block reveal reveal-delay-2">
+      <div class="contact-avatar">LI</div>
+      <div>
+        <p class="contact-name">Lydia Iana Gutierrez</p>
+        <div class="contact-links">
+          <a href="mailto:lydia.iana@gmail.com" class="contact-link">lydia.iana@gmail.com</a>
+          <a href="tel:4089312407" class="contact-link">(408) 931-2407</a>
+          <a href="https://linkedin.com/in/lydiaiana" class="contact-link" target="_blank" rel="noopener">linkedin.com/in/lydiaiana</a>
+        </div>
+        <a href="mailto:lydia.iana@gmail.com" class="contact-cta">Send a message →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Lydia Iana Gutierrez</p>
+  <p class="footer-note">Senior UX Research Operations Program Manager · San Jose, CA · 2026</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
